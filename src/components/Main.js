@@ -6,7 +6,7 @@ const TextBlock = (props) => {
 
 function Main() {
   return (
-    <main className="text-xl px-4">
+    <main className="text-xl px-4 h-screen">
       <TextBlock>
         Chuck Norris invented airplanes because he was tired of being the only
         person that could fly. Chuck Norris has never blinked in his entire
