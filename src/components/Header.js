@@ -30,7 +30,7 @@ const renderIcon = (showing) => {
 const renderHiddenMenu = (showing, arr) => {
   if (!showing)
     return (
-      <section className="flex justify-start h-12 items-center list-none bg-sky-700 text-white drop-shadow-lg">
+      <section className="flex justify-start h-12 items-center list-none bg-sky-700 text-white drop-shadow-lg sm:hidden">
         {renderLinks(arr)}
       </section>
     )
