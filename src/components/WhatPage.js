@@ -22,7 +22,7 @@ const paragraphs = [
 const renderCards = (articles) => {
   return articles.map(({ title, text }) => {
     return (
-      <div className="flex flex-col  m-8 shadow-xl">
+      <div className="flex flex-col m-8 shadow-xl">
         <h4 className="h-32 bg-amber-400 text-slate-700 text-3xl font-bold p-4 rounded-t-lg">
           {title}
         </h4>
@@ -36,7 +36,10 @@ const renderCards = (articles) => {
 
 function WhatPage() {
   return (
-    <main id="whatPage" className="grid grid-cols-2 h-screen px-12 pt-24">
+    <main
+      id="whatPage"
+      className="grid grid-cols md:grid-cols-2 md:h-screen px-12 pt-32"
+    >
       {renderCards(paragraphs)}
     </main>
   )

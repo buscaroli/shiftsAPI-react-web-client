@@ -22,6 +22,7 @@ function Footer() {
             a Chuck Norris shot every year.
           </p>
         </div>
+
         <div>
           <h4 className="text-lg font-bold">Title Three</h4>
           <p className="p-3 first-letter:text-4xl">

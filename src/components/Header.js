@@ -30,7 +30,7 @@ const renderIcon = (showing) => {
 const renderHiddenMenu = (showing, arr) => {
   if (!showing)
     return (
-      <section className="flex justify-start h-12 items-center list-none bg-amber-400 text-white drop-shadow-lg sm:hidden">
+      <section className="flex justify-start h-12 items-center list-none bg-amber-400 text-slate-700 drop-shadow-lg sm:hidden">
         {renderLinks(arr)}
       </section>
     )
@@ -50,7 +50,9 @@ function Header({ title }) {
         </ul>
         <div onClick={menuClick}>{renderIcon(showMenu)}</div>
       </section>
-      {renderHiddenMenu(showMenu, pages)}
+      <section className="fixed top-24 w-screen">
+        {renderHiddenMenu(showMenu, pages)}
+      </section>
     </>
   )
 }

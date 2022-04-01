@@ -5,7 +5,7 @@ import WhatPage from './components/WhatPage'
 
 function App() {
   return (
-    <div className="bg-slate-200">
+    <div className="grid grid-cols-1 bg-slate-200">
       <Header title="Shifts" />
 
       {/* <Main /> */}
