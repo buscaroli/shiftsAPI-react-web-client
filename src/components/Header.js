@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { MenuIcon, XIcon } from '@heroicons/react/outline'
 
 const pages = [
   ['Home', '/home'],
@@ -18,12 +19,39 @@ const renderLinks = (arr) => {
   })
 }
 
+const renderIcon = (showing) => {
+  return showing ? (
+    <MenuIcon className="h-10 pr-4 sm:hidden" />
+  ) : (
+    <XIcon className="h-10 pr-4 sm:hidden" />
+  )
+}
+
+const renderHiddenMenu = (showing, arr) => {
+  if (!showing)
+    return (
+      <section className="flex justify-start h-12 items-center list-none bg-sky-700 text-white drop-shadow-lg">
+        {renderLinks(arr)}
+      </section>
+    )
+}
+
 function Header({ title }) {
+  const [showMenu, setShowMenu] = useState(true)
+
+  const menuClick = () => setShowMenu(!showMenu)
+
   return (
-    <section className="sticky w-screen flex justify-between h-16 items-center  bg-sky-700 text-white drop-shadow-lg">
-      <h1 className="text-4xl text-bold pl-4">{title}</h1>
-      <ul className="flex justify-evenly pr-4">{renderLinks(pages)}</ul>
-    </section>
+    <>
+      <section className="sticky w-screen flex justify-between h-16 items-center  bg-sky-700 text-white drop-shadow-lg">
+        <h1 className="text-4xl text-bold pl-4">{title}</h1>
+        <ul className="hidden sm:flex sm:justify-evenly sm:pr-4">
+          {renderLinks(pages)}
+        </ul>
+        <div onClick={menuClick}>{renderIcon(showMenu)}</div>
+      </section>
+      {renderHiddenMenu(showMenu, pages)}
+    </>
   )
 }
 
