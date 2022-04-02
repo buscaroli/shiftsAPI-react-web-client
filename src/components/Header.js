@@ -5,17 +5,26 @@ const pages = [
   ['Home', '#home'],
   ['Data', '#data'],
   ['What', '#whatPage'],
-  ['Where', '#where'],
   ['About', '#footer'],
+  ['Login', '/login'],
 ]
 
 const renderLinks = (arr) => {
-  return arr.map((page) => {
-    return (
-      <li className="font-bold text-xl pl-6">
-        <a href={`${page[1]}`}>{`${page[0]}`}</a>
-      </li>
-    )
+  let last = arr.length - 1
+  return arr.map((page, index) => {
+    if (index === last) {
+      return (
+        <li className="font-bold text-xl px-3 py-2 ml-5 bg-sky-700 text-white rounded-full items-center">
+          <a href={`${page[1]}`}>{`${page[0]}`}</a>
+        </li>
+      )
+    } else {
+      return (
+        <li className="font-bold text-xl pl-6 py-2">
+          <a href={`${page[1]}`}>{`${page[0]}`}</a>
+        </li>
+      )
+    }
   })
 }
 
