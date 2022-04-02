@@ -10,6 +10,7 @@ function App() {
 
       {/* <Main /> */}
       <WhatPage />
+
       <Footer />
     </div>
   )
