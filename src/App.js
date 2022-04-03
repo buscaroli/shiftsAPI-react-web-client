@@ -1,16 +1,12 @@
-import { useState } from 'react'
 import Header from './components/Header'
 import Main from './components/Main'
 import Footer from './components/Footer'
 import WhatPage from './components/WhatPage'
 import LoginModal from './components/LoginModal'
-
-const renderLogin = (showing) => {
-  if (showing) return <LoginModal />
-}
+import { useSelector } from 'react-redux'
 
 function App() {
-  const [isShowingLogin, setIsShowingLogin] = useState(false)
+  const login = useSelector((state) => state.login.value)
 
   return (
     <div className="grid grid-cols-1 bg-slate-200">
@@ -19,7 +15,7 @@ function App() {
       {/* <Main /> */}
       <WhatPage />
 
-      {renderLogin(isShowingLogin)}
+      {login && <LoginModal />}
 
       <Footer />
     </div>

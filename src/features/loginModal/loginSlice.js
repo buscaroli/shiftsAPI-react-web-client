@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 export const loginSlice = createSlice({
-  name: 'loginModal',
+  name: 'login',
   initialState: {
     value: false,
   },
@@ -20,4 +20,4 @@ export const loginSlice = createSlice({
 
 export const { toggle, reset, switchOn } = loginSlice.actions
 
-export default loginSlice
+export default loginSlice.reducer
