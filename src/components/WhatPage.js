@@ -20,9 +20,9 @@ const paragraphs = [
 ]
 
 const renderCards = (articles) => {
-  return articles.map(({ title, text }) => {
+  return articles.map(({ title, text }, index) => {
     return (
-      <div className="flex flex-col m-8 shadow-xl">
+      <div key={index} className="flex flex-col m-8 shadow-xl">
         <h4 className="h-32 bg-amber-400 text-slate-700 text-3xl font-bold p-4 rounded-t-lg">
           {title}
         </h4>

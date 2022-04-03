@@ -30,7 +30,10 @@ function Header({ title }) {
     return arr.map((page, index) => {
       if (index === last) {
         return (
-          <li className="font-bold text-xl px-3 py-2 ml-5 bg-sky-700 text-white rounded-full items-center">
+          <li
+            key={index}
+            className="font-bold text-xl px-3 py-2 ml-5 bg-sky-700 text-white rounded-full items-center"
+          >
             <button
               onClick={(e) => {
                 e.preventDefault()
@@ -43,7 +46,7 @@ function Header({ title }) {
         )
       } else {
         return (
-          <li className="font-bold text-xl pl-6 py-2">
+          <li key={index} className="font-bold text-xl pl-6 py-2">
             <a href={`${page[1]}`}>{`${page[0]}`}</a>
           </li>
         )

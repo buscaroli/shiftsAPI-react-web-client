@@ -1,10 +1,9 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { useSelector, useDispatch } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { reset, toggle } from '../features/loginModal/loginSlice'
 
 function LoginModal() {
-  const login = useSelector((state) => state.login.value)
   const dispatch = useDispatch()
 
   return ReactDOM.createPortal(
