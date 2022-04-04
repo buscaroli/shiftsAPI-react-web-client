@@ -5,7 +5,7 @@ let baseUrl = 'http://buscaroli-shifts-api.herokuapp.com'
 export const serverSignUp = ({ name, email, password }) => {
   return new Promise(function (resolve, reject) {
     axios
-      .post(baseUrl + '/users/signUp', {
+      .post(baseUrl + '/users/signup', {
         name,
         email,
         password,

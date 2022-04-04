@@ -2,30 +2,44 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { useRef } from 'react'
 import { useDispatch } from 'react-redux'
-import { reset } from '../features/loginModal/loginModalSlice'
-import { login } from '../features/userData/userSlice'
+import { reset } from '../features/signUpModal/signUpModalSlice'
+import { signUp } from '../features/userData/userSlice'
 
-function LoginModal() {
+function SignUpModal() {
   const dispatch = useDispatch()
+  const nameInputRef = useRef(null)
   const emailInputRef = useRef(null)
   const passwordInputRef = useRef(null)
 
-  const callLogin = async () => {
+  const callSignUp = async () => {
     const userData = dispatch(
-      login({
+      signUp({
+        name: nameInputRef.current.value,
         email: emailInputRef.current.value,
         password: passwordInputRef.current.value,
       })
     )
-    // console.log('callLogin:\n', userData)
+    console.log('callSignUp:\n', userData)
   }
 
   return ReactDOM.createPortal(
     <div className="grid justify-center content-center w-screen h-screen fixed top-0 left-0 bg-gray-400">
       <div className="flex flex-col justify-between h-[600px] w-[400px] bg-gray-200 text-slate-700 text-3xl rounded-xl shadow-2xl">
-        <h1 className="mx-auto pt-4 text-6xl">Login</h1>
+        <h1 className="mx-auto pt-4 text-6xl">SignUp</h1>
 
         <form className="p-4">
+          <div className="p-4">
+            <label htmlFor="email">Name</label>
+            <input
+              ref={nameInputRef}
+              type="text"
+              className="rounded-lg p-2"
+              name="username"
+              id="username"
+              placeholder="Name"
+              required
+            ></input>
+          </div>
           <div className="p-4">
             <label htmlFor="email">Email</label>
             <input
@@ -54,7 +68,7 @@ function LoginModal() {
 
         <div className="flex justify-evenly">
           <button
-            onClick={callLogin}
+            onClick={callSignUp}
             className="mx-auto mb-4 w-38 p-4 rounded-full radius-md bg-green-600 text-white"
           >
             Submit
@@ -69,8 +83,8 @@ function LoginModal() {
         </div>
       </div>
     </div>,
-    document.querySelector('#login-modal')
+    document.querySelector('#signup-modal')
   )
 }
 
-export default LoginModal
+export default SignUpModal

@@ -1,14 +1,16 @@
 import React, { useState } from 'react'
 import { MenuIcon, XIcon } from '@heroicons/react/outline'
 import { useDispatch } from 'react-redux'
-import { switchOn } from '../features/loginModal/loginModalSlice'
+import { switchOn as loginSwitchOn } from '../features/loginModal/loginModalSlice'
+import { switchOn as signUpSwitchOn } from '../features/signUpModal/signUpModalSlice'
 
 const pages = [
   ['Home', '#home'],
   ['Data', '#data'],
   ['What', '#whatPage'],
   ['About', '#footer'],
-  ['Login', '/login'],
+  ['Login', '#'],
+  ['SignUp', '#'],
 ]
 
 const renderIcon = (showing) => {
@@ -28,16 +30,32 @@ function Header({ title }) {
   const renderLinks = (arr) => {
     let last = arr.length - 1
     return arr.map((page, index) => {
-      if (index === last) {
+      if (index === last - 1) {
         return (
           <li
             key={index}
-            className="font-bold text-xl px-3 py-2 ml-5 bg-sky-700 text-white rounded-full items-center"
+            className="font-bold text-xl px-3 py-2 ml-5 bg-green-600 text-white rounded-full items-center"
           >
             <button
               onClick={(e) => {
                 e.preventDefault()
-                dispatch(switchOn())
+                dispatch(loginSwitchOn())
+              }}
+            >
+              <a href={`${page[1]}`}>{`${page[0]}`}</a>
+            </button>
+          </li>
+        )
+      } else if (index === last) {
+        return (
+          <li
+            key={index}
+            className="font-bold text-xl px-3 py-2 ml-5 bg-orange-700 text-white rounded-full items-center"
+          >
+            <button
+              onClick={(e) => {
+                e.preventDefault()
+                dispatch(signUpSwitchOn())
               }}
             >
               <a href={`${page[1]}`}>{`${page[0]}`}</a>
