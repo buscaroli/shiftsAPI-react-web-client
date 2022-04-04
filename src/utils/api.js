@@ -20,7 +20,35 @@ export const serverSignUp = ({ name, email, password }) => {
           }
           resolve(userData)
         } else {
-          reject({ error: 'Unable to fetch shifts, try again later.' })
+          reject({ error: 'Unable to Sign Up, try again later.' })
+        }
+      })
+      .catch((error) => {
+        reject({
+          error,
+        })
+      })
+  })
+}
+
+export const serverLogin = ({ email, password }) => {
+  return new Promise(function (resolve, reject) {
+    axios
+      .post(baseUrl + '/users/login', {
+        email,
+        password,
+      })
+      .then((response) => {
+        if (response.status >= 200 && response.status < 300) {
+          const userData = {
+            name: response.data.user.name,
+            email: response.data.user.email,
+            id: response.data.user.id,
+            jwt: response.data.token,
+          }
+          resolve(userData)
+        } else {
+          reject({ error: 'Unable to Login, try again later.' })
         }
       })
       .catch((error) => {

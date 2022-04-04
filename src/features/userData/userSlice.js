@@ -1,11 +1,11 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-import { serverSignUp } from '../../utils/api'
+import { serverSignUp, serverLogin } from '../../utils/api'
 
 const initialState = {
-  userData: {},
+  userData: [],
   currentRequestId: '',
   loading: true,
-  error: 'error',
+  error: '',
 }
 
 export const signUp = createAsyncThunk(
@@ -13,6 +13,18 @@ export const signUp = createAsyncThunk(
   async ({ name, email, password }, { rejectWithValue }) => {
     try {
       const userData = await serverSignUp({ name, email, password })
+      return userData
+    } catch (err) {
+      return rejectWithValue([], err)
+    }
+  }
+)
+
+export const login = createAsyncThunk(
+  'users/login',
+  async ({ email, password }, { rejectWithValue }) => {
+    try {
+      const userData = await serverLogin({ email, password })
       return userData
     } catch (err) {
       return rejectWithValue([], err)
@@ -39,7 +51,25 @@ const { actions, reducer } = createSlice({
       if (meta.requestId === state.currentRequestId.requestId) {
         state.currentRequestId = meta
         state.loading = false
+        state.userData = {}
+        state.error = error
+      }
+    },
+    [login.fulfilled]: (state, { meta, payload }) => {
+      if (meta.requestId === state.currentRequestId.requestId) {
         state.userData = payload
+        state.loading = false
+      }
+    },
+    [login.pending]: (state, { meta }) => {
+      state.currentRequestId = meta
+      state.loading = true
+    },
+    [login.rejected]: (state, { meta, payload, error }) => {
+      if (meta.requestId === state.currentRequestId.requestId) {
+        state.currentRequestId = meta
+        state.loading = false
+        state.userData = {}
         state.error = error
       }
     },

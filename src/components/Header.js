@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { MenuIcon, XIcon } from '@heroicons/react/outline'
 import { useDispatch } from 'react-redux'
-import { switchOn } from '../features/loginModal/loginSlice'
+import { switchOn } from '../features/loginModal/loginModalSlice'
 
 const pages = [
   ['Home', '#home'],

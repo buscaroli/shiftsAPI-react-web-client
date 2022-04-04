@@ -1,23 +1,31 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { useDispatch } from 'react-redux'
-import { reset } from '../features/loginModal/loginSlice'
-import { serverSignUp } from '../../src/utils/api'
+import { reset } from '../features/loginModal/loginModalSlice'
+import { signUp, login } from '../features/userData/userSlice'
 
 function LoginModal() {
   const dispatch = useDispatch()
 
   const callSignUp = async () => {
-    let response = await serverSignUp({
-      name: 'mel',
-      email: 'mel@email.com',
-      password: 'melpassword',
-    })
-    try {
-      console.log(response)
-    } catch (err) {
-      console.log(err)
-    }
+    const userData = dispatch(
+      signUp({
+        name: 'Frank',
+        email: 'frank@email.com',
+        password: 'frankpassword',
+      })
+    )
+    console.log('callSignUp:\n', userData)
+  }
+
+  const callLogin = async () => {
+    const userData = dispatch(
+      login({
+        email: 'frank@email.com',
+        password: 'frankpassword',
+      })
+    )
+    console.log('callLogin:\n', userData)
   }
 
   return ReactDOM.createPortal(
@@ -55,11 +63,12 @@ function LoginModal() {
 
         <div className="flex justify-evenly">
           <button
-            onClick={() => dispatch(reset())}
+            onClick={callLogin}
             className="mx-auto mb-4 w-38 p-4 rounded-full radius-md bg-green-600 text-white"
           >
             Submit
           </button>
+
           <button
             onClick={() => dispatch(reset())}
             className="mx-auto mb-4 w-38 p-4 rounded-full radius-md bg-red-500 text-white"
