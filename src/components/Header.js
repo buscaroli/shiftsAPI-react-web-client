@@ -6,11 +6,11 @@ import { switchOn as signUpSwitchOn } from '../features/signUpModal/signUpModalS
 
 const pages = [
   ['Home', '#home'],
-  ['Data', '#data'],
+  ['Data', '/data'],
   ['What', '#whatPage'],
   ['About', '#footer'],
-  ['Login', '#'],
-  ['SignUp', '#'],
+  ['Login', ''],
+  ['SignUp', ''],
 ]
 
 const renderIcon = (showing) => {
