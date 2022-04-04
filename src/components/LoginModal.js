@@ -1,11 +1,14 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import { useRef } from 'react'
 import { useDispatch } from 'react-redux'
 import { reset } from '../features/loginModal/loginModalSlice'
 import { signUp, login } from '../features/userData/userSlice'
 
 function LoginModal() {
   const dispatch = useDispatch()
+  const emailInputRef = useRef(null)
+  const passwordInputRef = useRef(null)
 
   const callSignUp = async () => {
     const userData = dispatch(
@@ -21,8 +24,8 @@ function LoginModal() {
   const callLogin = async () => {
     const userData = dispatch(
       login({
-        email: 'frank@email.com',
-        password: 'frankpassword',
+        email: emailInputRef.current.value,
+        password: passwordInputRef.current.value,
       })
     )
     console.log('callLogin:\n', userData)
@@ -35,21 +38,27 @@ function LoginModal() {
 
         <form className="p-4">
           <div className="p-4">
-            <label htmlFor="username">Username</label>
+            <label htmlFor="email">Email</label>
             <input
+              ref={emailInputRef}
+              type="text"
               className="rounded-lg p-2"
-              name="username"
-              id="username"
-              placeholder="username"
+              name="email"
+              id="email"
+              placeholder="Email"
+              required
             ></input>
           </div>
           <div className="p-4">
             <label htmlFor="password">Password</label>
             <input
+              ref={passwordInputRef}
+              type="password"
               className="rounded-lg p-2"
               name="password"
               id="password"
               placeholder="password"
+              required
             ></input>
           </div>
         </form>
