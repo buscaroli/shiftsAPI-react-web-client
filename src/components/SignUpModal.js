@@ -19,6 +19,7 @@ function SignUpModal() {
         password: passwordInputRef.current.value,
       })
     )
+    // if status === 201 navigate to the Data page
     console.log('callSignUp:\n', userData)
   }
 

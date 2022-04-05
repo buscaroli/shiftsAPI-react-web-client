@@ -5,7 +5,7 @@ const initialState = {
   userData: [],
   currentRequestId: '',
   loading: true,
-  error: '',
+  error: null,
 }
 
 export const signUp = createAsyncThunk(
@@ -15,7 +15,7 @@ export const signUp = createAsyncThunk(
       const userData = await serverSignUp({ name, email, password })
       return userData
     } catch (err) {
-      return rejectWithValue([], err)
+      return rejectWithValue('Something went wrong', err)
     }
   }
 )
@@ -27,7 +27,7 @@ export const login = createAsyncThunk(
       const userData = await serverLogin({ email, password })
       return userData
     } catch (err) {
-      return rejectWithValue([], err)
+      return rejectWithValue('Wrong Credentials.', err)
     }
   }
 )
