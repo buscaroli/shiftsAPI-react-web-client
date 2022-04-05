@@ -1,9 +1,10 @@
 import React, { useState } from 'react'
+import { Link } from 'react-router-dom'
 import { MenuIcon, XIcon } from '@heroicons/react/outline'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { switchOn as loginSwitchOn } from '../features/loginModal/loginModalSlice'
 import { switchOn as signUpSwitchOn } from '../features/signUpModal/signUpModalSlice'
-import { useSelector } from 'react-redux'
+import { logout } from '../features/userData/userSlice'
 
 const pages = [
   ['Home', '/'],
@@ -26,12 +27,24 @@ function Header({ title }) {
   // true if user is logged in (either through the Login modal or the SignUp modal)
   const userLoggedIn = useSelector((state) => state.user.userData.name)
   const dispatch = useDispatch()
+  const userData = useSelector((state) => state.user.userData)
+
+  const logOff = async () => {
+    console.log(`logging out: `, userData)
+    const res = dispatch(
+      logout({
+        name: userData.name,
+        email: userData.email,
+        jwt: userData.jwt,
+      })
+    )
+  }
 
   const renderLinks = (arr) => {
     return arr.map((page, index) => {
       return (
         <li key={index} className="font-bold text-xl pl-4 py-2">
-          <a href={`${page[1]}`}>{`${page[0]}`}</a>
+          <Link to={`${page[1]}`}>{`${page[0]}`}</Link>
         </li>
       )
     })
@@ -69,11 +82,27 @@ function Header({ title }) {
     )
   }
 
+  // logout button that should be shown only if user logged in
+  const LogOutButton = () => {
+    return (
+      <li className="font-bold text-xl px-3 py-2 ml-5 bg-orange-700 text-white rounded-full items-center">
+        <button
+          onClick={(e) => {
+            e.preventDefault()
+            dispatch(logOff())
+          }}
+        >
+          LogOut
+        </button>
+      </li>
+    )
+  }
+
   // Data link that should be shown only if user is logged in
   const DataLink = () => {
     return (
       <li className="font-bold text-xl pl-4 py-2">
-        <a href="#">Data</a>
+        <Link to="/dataPage">Data</Link>
       </li>
     )
   }
@@ -99,6 +128,7 @@ function Header({ title }) {
           {userLoggedIn && <DataLink />}
           {!userLoggedIn && <LoginButton />}
           {!userLoggedIn && <SignUpButton />}
+          {userLoggedIn && <LogOutButton />}
         </ul>
         <div onClick={menuClick}>{renderIcon(showMenu)}</div>
       </section>

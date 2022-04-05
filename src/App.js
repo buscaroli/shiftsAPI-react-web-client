@@ -6,11 +6,13 @@ import { useSelector } from 'react-redux'
 import HomePage from './components/HomePage'
 import WhatPage from './components/WhatPage'
 import WhyPage from './components/WhyPage'
+import DataPage from './components/DataPage'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
 function App() {
   const login = useSelector((state) => state.login.value)
   const signup = useSelector((state) => state.signup.value)
+  const userLoggedIn = useSelector((state) => state.user.userData.name)
   return (
     <div className="grid grid-cols-1">
       <BrowserRouter>
@@ -19,6 +21,7 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/whatPage" element={<WhatPage />} />
           <Route path="/whyPage" element={<WhyPage />} />
+          <Route path="/dataPage" element={<DataPage />} />
         </Routes>
         <Footer />
       </BrowserRouter>

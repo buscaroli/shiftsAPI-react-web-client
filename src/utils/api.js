@@ -59,6 +59,36 @@ export const serverLogin = ({ email, password }) => {
   })
 }
 
+export const serverLogout = ({ email, password, jwt }) => {
+  return new Promise(function (resolve, reject) {
+    axios
+      .post(
+        baseUrl + '/users/login',
+        {
+          email,
+          password,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${jwt}`,
+          },
+        }
+      )
+      .then((response) => {
+        if (response.status >= 200 && response.status < 300) {
+          resolve({ response: 'Logged Out successfully.' })
+        } else {
+          reject({ error: 'Unable to Logout, try again later.' })
+        }
+      })
+      .catch((error) => {
+        reject({
+          error,
+        })
+      })
+  })
+}
+
 // HOW TO USE
 // serverSignUp(userObj)
 //   .then(res => console.log(res))

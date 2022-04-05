@@ -17,6 +17,8 @@ function LoginModal() {
         password: passwordInputRef.current.value,
       })
     )
+
+    dispatch(reset())
     // if status === 200 navigate to the Data page
     // console.log('callLogin:\n', userData)
   }

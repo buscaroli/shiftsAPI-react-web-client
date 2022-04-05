@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-import { serverSignUp, serverLogin } from '../../utils/api'
+import { serverSignUp, serverLogin, serverLogout } from '../../utils/api'
 
 const initialState = {
   userData: [],
@@ -32,6 +32,19 @@ export const login = createAsyncThunk(
   }
 )
 
+export const logout = createAsyncThunk(
+  'users/logout',
+  async ({ email, password, jwt }, { rejectWithValue }) => {
+    try {
+      const userData = await serverLogout({ email, password, jwt })
+      console.log('logging out: ', userData)
+      return userData
+    } catch (err) {
+      return rejectWithValue('Unable to Logout.', err)
+    }
+  }
+)
+
 const { actions, reducer } = createSlice({
   name: 'users',
   initialState,
@@ -51,7 +64,7 @@ const { actions, reducer } = createSlice({
       if (meta.requestId === state.currentRequestId.requestId) {
         state.currentRequestId = meta
         state.loading = false
-        state.userData = {}
+        state.userData = []
         state.error = error
       }
     },
@@ -69,7 +82,24 @@ const { actions, reducer } = createSlice({
       if (meta.requestId === state.currentRequestId.requestId) {
         state.currentRequestId = meta
         state.loading = false
-        state.userData = {}
+        state.userData = []
+        state.error = error
+      }
+    },
+    [logout.fulfilled]: (state, { meta, payload }) => {
+      if (meta.requestId === state.currentRequestId.requestId) {
+        state.userData = []
+        state.loading = false
+      }
+    },
+    [logout.pending]: (state, { meta, payload }) => {
+      state.currentRequestId = meta
+      state.loading = true
+    },
+    [logout.rejected]: (state, { meta, payload, error }) => {
+      if (meta.requestId === state.currentRequestId.requestId) {
+        state.currentRequestId = meta
+        state.loading = false
         state.error = error
       }
     },
