@@ -22,13 +22,9 @@ const paragraphs = [
 const renderCards = (articles) => {
   return articles.map(({ title, text }, index) => {
     return (
-      <div key={index} className="flex flex-col m-8 shadow-xl">
-        <h4 className="h-32 bg-amber-400 text-slate-700 text-3xl font-bold p-4 rounded-t-lg">
-          {title}
-        </h4>
-        <p className=" bg-slate-600 text-slate-200 text-2xl tracking-wide leading-10 h-full p-8 rounded-b-lg">
-          {text}
-        </p>
+      <div key={index} className="grid grid-rows-2 m-4">
+        <h4 className="bg-amber-400 p-2 rounded-t-lg text-3xl">{title}</h4>
+        <p className=" bg-slate-300 p-2 rounded-b-lg text-xl">{text}</p>
       </div>
     )
   })
@@ -38,9 +34,12 @@ function WhatPage() {
   return (
     <main
       id="whatPage"
-      className="grid grid-cols md:grid-cols-2 md:h-screen px-12 pt-32"
+      className="mt-32 pl-4 mb-4 h-screen mx-auto md:w-[800px]"
     >
-      {renderCards(paragraphs)}
+      <h1 className="text-4xl my-6">What can this App do for you?</h1>
+      <article className="grid grid-cols-1 md:grid-cols-2 pl-4">
+        {renderCards(paragraphs)}
+      </article>
     </main>
   )
 }

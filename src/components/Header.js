@@ -6,10 +6,9 @@ import { switchOn as signUpSwitchOn } from '../features/signUpModal/signUpModalS
 import { useSelector } from 'react-redux'
 
 const pages = [
-  ['Home', '#home'],
-  ['Data', '/data'],
-  ['What', '#whatPage'],
-  ['About', '#footer'],
+  ['Home', '/'],
+  ['What', '/whatPage'],
+  ['Why', '/whyPage'],
 ]
 
 const renderIcon = (showing) => {
@@ -29,16 +28,16 @@ function Header({ title }) {
   const dispatch = useDispatch()
 
   const renderLinks = (arr) => {
-    let last = arr.length - 1
     return arr.map((page, index) => {
       return (
-        <li key={index} className="font-bold text-xl pl-6 py-2">
+        <li key={index} className="font-bold text-xl pl-4 py-2">
           <a href={`${page[1]}`}>{`${page[0]}`}</a>
         </li>
       )
     })
   }
 
+  // login button that should be shown only if user NOT logged in
   const LoginButton = () => {
     return (
       <li className="font-bold text-xl px-3 py-2 ml-5 bg-green-600 text-white rounded-full items-center">
@@ -48,12 +47,13 @@ function Header({ title }) {
             dispatch(loginSwitchOn())
           }}
         >
-          <a href="#">LogIn</a>
+          LogIn
         </button>
       </li>
     )
   }
 
+  // signup button that should be shown only if user NOT logged in
   const SignUpButton = () => {
     return (
       <li className="font-bold text-xl px-3 py-2 ml-5 bg-orange-700 text-white rounded-full items-center">
@@ -63,8 +63,17 @@ function Header({ title }) {
             dispatch(signUpSwitchOn())
           }}
         >
-          <a href="#">SignUp</a>
+          SignUp
         </button>
+      </li>
+    )
+  }
+
+  // Data link that should be shown only if user is logged in
+  const DataLink = () => {
+    return (
+      <li className="font-bold text-xl pl-4 py-2">
+        <a href="#">Data</a>
       </li>
     )
   }
@@ -74,16 +83,20 @@ function Header({ title }) {
       return (
         <section className="flex justify-start h-12 items-center list-none bg-amber-400 text-slate-700 drop-shadow-lg sm:hidden">
           {renderLinks(arr)}
+          {userLoggedIn && <DataLink />}
+          {!userLoggedIn && <LoginButton />}
+          {!userLoggedIn && <SignUpButton />}
         </section>
       )
   }
 
   return (
     <>
-      <section className="fixed w-screen flex justify-between h-24 items-center  bg-amber-400 text-slate-700 drop-shadow-lg">
+      <section className="fixed top-0 w-screen flex justify-between h-24 items-center  bg-amber-400 text-slate-700 drop-shadow-lg">
         <h1 className="text-6xl text-bold pl-4">{title}</h1>
         <ul className="hidden sm:flex sm:justify-evenly sm:pr-4">
           {renderLinks(pages)}
+          {userLoggedIn && <DataLink />}
           {!userLoggedIn && <LoginButton />}
           {!userLoggedIn && <SignUpButton />}
         </ul>

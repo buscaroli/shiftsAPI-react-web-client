@@ -25,7 +25,7 @@ function SignUpModal() {
 
   return ReactDOM.createPortal(
     <div className="grid justify-center content-center w-screen h-screen fixed top-0 left-0 bg-gray-400">
-      <div className="flex flex-col justify-between h-[600px] w-[400px] bg-gray-200 text-slate-700 text-3xl rounded-xl shadow-2xl">
+      <div className="flex flex-col justify-between h-[600px] w-[400px] bg-gray-200 text-slate-700 text-3xl rounded-xl drop-shadow-2xl">
         <h1 className="mx-auto pt-4 text-6xl">SignUp</h1>
 
         <form className="p-4">
