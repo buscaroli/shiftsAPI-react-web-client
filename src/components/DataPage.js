@@ -2,20 +2,20 @@ import React from 'react'
 import { useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { PlusIcon } from '@heroicons/react/solid'
-import { today } from '../utils/timeFormat'
+import { todayWithDay } from '../utils/timeFormat'
 
 const UserCard = ({ userData }) => {
   console.log(`the data is ${userData.name} and ${userData.email}`)
   return (
     <div className="grid grid-cols-1 grid-rows-3 p-21 drop-shadow-lg w-full">
-      <div className="bg-amber-400 text-2xl text-slate-700  rounded-t-lg p-3 items-center">
+      <div className="bg-amber-400 pt-6 text-2xl text-slate-700  rounded-t-lg p-3 items-center">
         {userData.name}
       </div>
-      <div className="bg-slate-300 text-xl text-slate-700 p-3 items-center border-b-2">
+      <div className="bg-slate-300 pt-6 text-xl text-slate-700 p-3 items-center border-b-2">
         {userData.email}
       </div>
-      <div className="bg-slate-300 text-xl text-slate-700 rounded-b-lg p-3 items-center">
-        {today()}
+      <div className="bg-slate-300 pt-6 text-xl text-slate-700 rounded-b-lg p-3 items-center">
+        {todayWithDay()}
       </div>
     </div>
   )
