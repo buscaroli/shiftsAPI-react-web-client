@@ -115,6 +115,7 @@ function Header({ title }) {
           {userLoggedIn && <DataLink />}
           {!userLoggedIn && <LoginButton />}
           {!userLoggedIn && <SignUpButton />}
+          {userLoggedIn && <LogOutButton />}
         </section>
       )
   }

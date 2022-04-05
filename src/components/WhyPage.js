@@ -14,7 +14,7 @@ const renderGoals = (arr) => {
   return arr.map((goal, index) => {
     return (
       <li key={index} className="pl-4 py-2">
-        -> {goal}
+        <p>👉 {goal}</p>
       </li>
     )
   })
@@ -27,8 +27,10 @@ const ListOfGoals = ({ goals }) => {
 function WhyPage() {
   return (
     <>
-      <main className="h-screen mt-24 pl-4 mb-4 mx-auto md:w-[800px]">
-        <h1 className="text-4xl my-6">Why this App?</h1>
+      <main className="h-screen mt-40 sm:mt-28 pl-4 mb-4 mx-auto md:w-[800px]">
+        <h1 className="text-4xl text-center mb-6 text-slate-700">
+          Why this App?
+        </h1>
         <article className="grid grid-cols-1 pl-4 text-xl">
           You might be wondering what made me develop this app in the first
           place, after all there are probably already a bazillion app that do
