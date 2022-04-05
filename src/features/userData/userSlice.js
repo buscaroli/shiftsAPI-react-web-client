@@ -34,10 +34,9 @@ export const login = createAsyncThunk(
 
 export const logout = createAsyncThunk(
   'users/logout',
-  async ({ email, password, jwt }, { rejectWithValue }) => {
+  async ({ jwt }, { rejectWithValue }) => {
     try {
-      const userData = await serverLogout({ email, password, jwt })
-      console.log('logging out: ', userData)
+      const userData = await serverLogout({ jwt })
       return userData
     } catch (err) {
       return rejectWithValue('Unable to Logout.', err)

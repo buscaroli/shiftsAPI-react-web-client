@@ -59,18 +59,16 @@ export const serverLogin = ({ email, password }) => {
   })
 }
 
-export const serverLogout = ({ email, password, jwt }) => {
+export const serverLogout = ({ jwt }) => {
+  const token = `Bearer ${jwt}`
   return new Promise(function (resolve, reject) {
     axios
       .post(
-        baseUrl + '/users/login',
-        {
-          email,
-          password,
-        },
+        baseUrl + '/users/logout',
+        {},
         {
           headers: {
-            Authorization: `Bearer ${jwt}`,
+            Authorization: token,
           },
         }
       )
