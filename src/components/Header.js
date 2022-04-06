@@ -124,7 +124,7 @@ function Header({ title }) {
     <>
       <section className="fixed top-0 w-screen flex justify-between h-24 items-center  bg-amber-400 text-slate-700 drop-shadow-lg z-50">
         <h1 className="text-6xl text-bold pl-4">{title}</h1>
-        <ul className="hidden sm:flex sm:justify-evenly sm:pr-4">
+        <ul className="hidden sm:flex sm:justify-evenly sm:pr-4 ">
           {renderLinks(pages)}
           {userLoggedIn && <DataLink />}
           {!userLoggedIn && <LoginButton />}
@@ -133,7 +133,7 @@ function Header({ title }) {
         </ul>
         <div onClick={menuClick}>{renderIcon(showMenu)}</div>
       </section>
-      <section className="fixed z-50 top-24 w-screen">
+      <section className="fixed z-50 top-24 w-screen transition-all ease-in-out">
         {renderHiddenMenu(showMenu, pages)}
       </section>
     </>

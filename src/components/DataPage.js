@@ -135,7 +135,7 @@ function DataPage() {
   }
 
   return (
-    <main className="h-screen mt-40 sm:mt-28 pl-4 mb-4 mx-auto">
+    <main className=" h-screen mt-40 sm:mt-28 pl-4 mb-4 mx-auto">
       <section>
         <div className="grid grid-cols-1 sm:grid-cols-2 p-4 gap-4">
           <UserCard userData={user} />
@@ -152,11 +152,11 @@ function DataPage() {
       <article>
         <button
           onClick={fetchShifts}
-          className="h20 w-20 bg-amber-400 p-2 ml-4  rounded-lg"
+          className="h20 w-30 bg-amber-400 p-2 ml-6 rounded-lg drop-shadow-lg"
         >
-          fetch
+          Load Shifts
         </button>
-        <div className="grid md:grid-cols-2 p-4">
+        <div className="grid md:grid-cols-2 p-4 h-screen">
           <ShiftsList />
         </div>
       </article>
