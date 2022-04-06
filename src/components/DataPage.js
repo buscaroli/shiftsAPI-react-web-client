@@ -87,12 +87,12 @@ const NewShiftForm = ({ when, where, desc, billed, paid, callAddShift }) => {
 /////////////////////////////
 // DataPage Component ///////
 function DataPage() {
+  // getting the user data to populate the UserCard
   const userStoredData = useSelector((state) => state.user.userData)
   let user = {
     name: userStoredData.name,
     email: userStoredData.email,
   }
-  // const list = useSelector((state) => state.shifts.list)
 
   const dispatch = useDispatch()
   useEffect(() => {
@@ -100,6 +100,13 @@ function DataPage() {
     dispatch(getAll(userStoredData))
   })
 
+  // getting the shifts from the server using the user data
+
+  const fetchShifts = async () => {
+    const shiftsData = dispatch(getAll(userStoredData))
+  }
+
+  // getting the references to the shift form to get their values
   let whenInputRef = useRef(null)
   let whereInputRef = useRef(null)
   let descInputRef = useRef(null)
@@ -107,17 +114,17 @@ function DataPage() {
   let paidInputRef = useRef(null)
 
   const callAddShift = () => {
-    let sData = {
-      when: whenInputRef.current.value,
-      where: whereInputRef.current.value,
-      description: descInputRef.current.value,
-      billed: billedInputRef.current.value,
-      paid: paidInputRef.current.checked,
-    }
-    let uData = {
-      id: userStoredData.id,
-      jwt: userStoredData.jwt,
-    }
+    // let sData = {
+    //   when: whenInputRef.current.value,
+    //   where: whereInputRef.current.value,
+    //   description: descInputRef.current.value,
+    //   billed: billedInputRef.current.value,
+    //   paid: paidInputRef.current.checked,
+    // }
+    // let uData = {
+    //   id: userStoredData.id,
+    //   jwt: userStoredData.jwt,
+    // }
 
     let data = {
       shift: {
@@ -134,8 +141,8 @@ function DataPage() {
     }
 
     console.log('data\n', data)
-
-    dispatch(add(data))
+    console.log('DataPage.js -> userStoredData:', userStoredData)
+    // dispatch(add(data))
   }
 
   return (
@@ -154,7 +161,12 @@ function DataPage() {
         </div>
       </section>
       <article>
-        Data
+        <button
+          onClick={fetchShifts}
+          className="h20 w-20 bg-amber-400 p-2 ml-4  rounded-lg"
+        >
+          fetch
+        </button>
         <div></div>
       </article>
     </main>

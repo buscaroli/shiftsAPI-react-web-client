@@ -11,9 +11,10 @@ const initialState = {
 export const getAll = createAsyncThunk(
   'shifts/getAll',
   async (user, { rejectWithValue }) => {
-    console.log(`ahiftSlice.js user: `, user)
+    console.log(`shiftSlice.js user: `, user)
     try {
       const shifts = await shiftsGetAll(user)
+      console.log('shiftSlice.js AFTER call: shifts: ', shifts)
       return shifts
     } catch (err) {
       return rejectWithValue('Something went wrong retrieving your shifts.')

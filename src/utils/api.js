@@ -87,23 +87,17 @@ export const serverLogout = ({ jwt }) => {
   })
 }
 
-export const shiftsGetAll = (user) => {
-  const token = `Bearer ${user.jwt}`
-  console.log(`api'js user: `, user)
+export const shiftsGetAll = ({ jwt }) => {
+  const token = `Bearer ${jwt}`
   return new Promise(function (resolve, reject) {
     axios
-      .get(
-        baseUrl + '/shifts',
-        {
-          owner: user.id,
+      .get(baseUrl + '/shifts/', {
+        headers: {
+          Authorization: token,
         },
-        {
-          headers: {
-            Authorization: token,
-          },
-        }
-      )
+      })
       .then((response) => {
+        console.log('api.js shiftsGetAll, response: ', response)
         if (response.status >= 200 && response.status < 300) {
           resolve(response)
         } else {
@@ -111,6 +105,7 @@ export const shiftsGetAll = (user) => {
         }
       })
       .catch((error) => {
+        console.log('api.js catch of shiftsGetAll, error ', error)
         reject({ error })
       })
   })
