@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { PlusIcon } from '@heroicons/react/solid'
 import { todayWithDay } from '../utils/timeFormat'
 import { getAll, add } from '../features/userData/shiftSlice'
+import ShiftsList from './ShiftsList'
 
 const UserCard = ({ userData }) => {
   return (
@@ -106,7 +107,6 @@ function DataPage() {
   const fetchShifts = useCallback(() => {
     dispatch(getAll(userStoredData))
   }, [dispatch, userStoredData])
-  // const list = useSelector((state) => state.shifts.list.data)
 
   // getting the references to the shift form to get their values
   let whenInputRef = useRef(null)
@@ -130,22 +130,8 @@ function DataPage() {
       },
     }
 
-    console.log('data\n', data)
-    console.log('DataPage.js -> userStoredData:', userStoredData)
-  }
-
-  const renderList = (arr) => {
-    console.log('hi')
-    // return arr.map((shift, index) => {
-    //   return (
-    //     <div key={index} className="grid grid-cols-4 grid-rows-4 p-2 ">
-    //       <div className="col-span-4 p-2">Date: {shift.when}</div>
-    //       <div className="col-span-3 p-2">{shift.where}</div>
-    //       <div className="col-span-1 p-2">£{shift.billed}</div>
-    //       <div className="col-span-4 row-span-2">{shift.description}</div>
-    //     </div>
-    //   )
-    // })
+    dispatch(add(data))
+    fetchShifts()
   }
 
   return (
@@ -170,8 +156,9 @@ function DataPage() {
         >
           fetch
         </button>
-        <div className="grid md:grid-cols-2 p-4">{renderList()}</div>
-        <div></div>
+        <div className="grid md:grid-cols-2 p-4">
+          <ShiftsList />
+        </div>
       </article>
     </main>
   )

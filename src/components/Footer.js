@@ -4,7 +4,7 @@ function Footer() {
   return (
     <div
       id="footer"
-      className="w-screen sticky bottom-0 py-2 flex flex-col bg-amber-400 text-black text-center text-sm tracking-wide md:justify-center items-center content-center"
+      className="w-screen sticky bottom-[-220px] py-2 flex flex-col bg-amber-400 text-black text-center text-sm tracking-wide md:justify-center items-center content-center"
     >
       <div className="flex content-start md:w-[800px]">
         <div>
