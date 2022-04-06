@@ -4,6 +4,7 @@ import { useRef } from 'react'
 import { useDispatch } from 'react-redux'
 import { reset } from '../features/loginModal/loginModalSlice'
 import { login } from '../features/userData/userSlice'
+import { getAll } from '../features/userData/shiftSlice'
 
 function LoginModal() {
   const dispatch = useDispatch()

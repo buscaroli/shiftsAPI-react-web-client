@@ -1,11 +1,11 @@
 import React from 'react'
 import { useEffect } from 'react'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { PlusIcon } from '@heroicons/react/solid'
 import { todayWithDay } from '../utils/timeFormat'
+import { getAll } from '../features/userData/shiftSlice'
 
 const UserCard = ({ userData }) => {
-  console.log(`the data is ${userData.name} and ${userData.email}`)
   return (
     <div className="grid grid-cols-1 grid-rows-3 p-21 drop-shadow-lg w-full">
       <div className="bg-amber-400 pt-6 text-2xl text-slate-700  rounded-t-lg p-3 items-center">
@@ -69,16 +69,20 @@ const NewShiftForm = () => {
   )
 }
 
+/////////////////////////////
+// DataPage Component ///////
 function DataPage() {
   const userStoredData = useSelector((state) => state.user.userData)
   let user = {
     name: userStoredData.name,
     email: userStoredData.email,
   }
+
+  const dispatch = useDispatch()
+  let list = []
   useEffect(() => {
-    user = { name: userStoredData.name, email: userStoredData.email }
-    console.log(user)
-  }, [userStoredData])
+    list = dispatch(getAll(userStoredData.id))
+  })
 
   return (
     <main className="h-screen mt-40 sm:mt-28 pl-4 mb-4 mx-auto">
@@ -89,7 +93,7 @@ function DataPage() {
         </div>
       </section>
       <article>
-        <h3 className="text-2xl text-slate-700">Data</h3>
+        {list[0]}
         <div></div>
       </article>
     </main>

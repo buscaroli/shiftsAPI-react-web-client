@@ -87,7 +87,30 @@ export const serverLogout = ({ jwt }) => {
   })
 }
 
-// HOW TO USE
-// serverSignUp(userObj)
-//   .then(res => console.log(res))
-//   .catch(err => console.log(err))
+export const shiftsGetAll = ({ _id, jwt }) => {
+  const token = `Bearer ${jwt}`
+  return new Promise(function (resolve, reject) {
+    axios
+      .get(
+        baseUrl + '/shifts',
+        {
+          _id,
+        },
+        {
+          headers: {
+            Authorization: token,
+          },
+        }
+      )
+      .then((response) => {
+        if (response.status >= 200 && response.status < 300) {
+          resolve(response)
+        } else {
+          reject({ error: 'Unable to retrieve shifts. Try again later.' })
+        }
+      })
+      .catch((error) => {
+        reject({ error })
+      })
+  })
+}
