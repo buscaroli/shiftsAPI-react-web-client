@@ -87,14 +87,15 @@ export const serverLogout = ({ jwt }) => {
   })
 }
 
-export const shiftsGetAll = ({ _id, jwt }) => {
-  const token = `Bearer ${jwt}`
+export const shiftsGetAll = (user) => {
+  const token = `Bearer ${user.jwt}`
+  console.log(`api'js user: `, user)
   return new Promise(function (resolve, reject) {
     axios
       .get(
         baseUrl + '/shifts',
         {
-          _id,
+          owner: user.id,
         },
         {
           headers: {

@@ -96,7 +96,8 @@ function DataPage() {
 
   const dispatch = useDispatch()
   useEffect(() => {
-    dispatch(getAll(userStoredData.id))
+    console.log(`DataPage userStoredData: `, userStoredData)
+    dispatch(getAll(userStoredData))
   })
 
   let whenInputRef = useRef(null)
@@ -118,9 +119,23 @@ function DataPage() {
       jwt: userStoredData.jwt,
     }
 
-    console.log('sData\n', sData)
-    console.log('uData\n', uData)
-    // add()
+    let data = {
+      shift: {
+        when: whenInputRef.current.value,
+        where: whereInputRef.current.value,
+        description: descInputRef.current.value,
+        billed: billedInputRef.current.value,
+        paid: paidInputRef.current.checked,
+      },
+      user: {
+        id: userStoredData.id,
+        jwt: userStoredData.jwt,
+      },
+    }
+
+    console.log('data\n', data)
+
+    dispatch(add(data))
   }
 
   return (

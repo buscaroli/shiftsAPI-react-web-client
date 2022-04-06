@@ -10,9 +10,10 @@ const initialState = {
 
 export const getAll = createAsyncThunk(
   'shifts/getAll',
-  async ({ _id, jwt }, { rejectWithValue }) => {
+  async (user, { rejectWithValue }) => {
+    console.log(`ahiftSlice.js user: `, user)
     try {
-      const shifts = await shiftsGetAll({ _id, jwt })
+      const shifts = await shiftsGetAll(user)
       return shifts
     } catch (err) {
       return rejectWithValue('Something went wrong retrieving your shifts.')
@@ -55,12 +56,12 @@ const { action, reducer } = createSlice({
         state.currentRequestId = meta
         state.loading = false
         state.list = []
-        state.error = error
       }
     },
     [add.fulfilled]: (state, { meta, payload, error }) => {
       if (meta.requestId === state.currentRequestId.requestId) {
         state.loading = false
+        state.error = null
       }
     },
     [add.pending]: (state, { meta }) => {
