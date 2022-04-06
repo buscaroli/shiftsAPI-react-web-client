@@ -1,5 +1,5 @@
 import React from 'react'
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useCallback } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { PlusIcon } from '@heroicons/react/solid'
 import { todayWithDay } from '../utils/timeFormat'
@@ -101,10 +101,12 @@ function DataPage() {
   })
 
   // getting the shifts from the server using the user data
+  // const list = useSelector((state) => state.shifts.list.data)
 
-  const fetchShifts = async () => {
-    const shiftsData = dispatch(getAll(userStoredData))
-  }
+  const fetchShifts = useCallback(() => {
+    dispatch(getAll(userStoredData))
+  }, [dispatch, userStoredData])
+  // const list = useSelector((state) => state.shifts.list.data)
 
   // getting the references to the shift form to get their values
   let whenInputRef = useRef(null)
@@ -114,18 +116,6 @@ function DataPage() {
   let paidInputRef = useRef(null)
 
   const callAddShift = () => {
-    // let sData = {
-    //   when: whenInputRef.current.value,
-    //   where: whereInputRef.current.value,
-    //   description: descInputRef.current.value,
-    //   billed: billedInputRef.current.value,
-    //   paid: paidInputRef.current.checked,
-    // }
-    // let uData = {
-    //   id: userStoredData.id,
-    //   jwt: userStoredData.jwt,
-    // }
-
     let data = {
       shift: {
         when: whenInputRef.current.value,
@@ -142,7 +132,20 @@ function DataPage() {
 
     console.log('data\n', data)
     console.log('DataPage.js -> userStoredData:', userStoredData)
-    // dispatch(add(data))
+  }
+
+  const renderList = (arr) => {
+    console.log('hi')
+    // return arr.map((shift, index) => {
+    //   return (
+    //     <div key={index} className="grid grid-cols-4 grid-rows-4 p-2 ">
+    //       <div className="col-span-4 p-2">Date: {shift.when}</div>
+    //       <div className="col-span-3 p-2">{shift.where}</div>
+    //       <div className="col-span-1 p-2">£{shift.billed}</div>
+    //       <div className="col-span-4 row-span-2">{shift.description}</div>
+    //     </div>
+    //   )
+    // })
   }
 
   return (
@@ -167,6 +170,7 @@ function DataPage() {
         >
           fetch
         </button>
+        <div className="grid md:grid-cols-2 p-4">{renderList()}</div>
         <div></div>
       </article>
     </main>

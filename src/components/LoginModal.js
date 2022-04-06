@@ -12,7 +12,7 @@ function LoginModal() {
   const passwordInputRef = useRef(null)
 
   const callLogin = async () => {
-    const userData = dispatch(
+    dispatch(
       login({
         email: emailInputRef.current.value,
         password: passwordInputRef.current.value,
