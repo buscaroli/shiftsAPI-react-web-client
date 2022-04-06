@@ -114,3 +114,36 @@ export const shiftsGetAll = ({ _id, jwt }) => {
       })
   })
 }
+
+export const addShift = (shift, user) => {
+  const token = `Bearer ${user.jwt}`
+  return new Promise(function (resolve, reject) {
+    axios
+      .post(
+        baseUrl + '/shifts/add',
+        {
+          owner: user.id,
+          when: shift.when,
+          where: shift.where,
+          description: shift.description,
+          billed: shift.billed,
+          paid: shift.paid,
+        },
+        {
+          headers: {
+            Authorization: token,
+          },
+        }
+      )
+      .then((response) => {
+        if (response.status >= 200 && response.status < 300) {
+          resolve(response)
+        } else {
+          reject({ error: 'Unable to add shift to the database.' })
+        }
+      })
+      .catch((error) => {
+        reject({ error })
+      })
+  })
+}
