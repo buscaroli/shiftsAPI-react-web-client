@@ -143,3 +143,28 @@ export const addShift = (shift, user) => {
       })
   })
 }
+
+export const deleteShift = ({ shift, user }) => {
+  const token = `Bearer ${user.jwt}`
+  console.log('api.js removeShift, shift and user:\n')
+  console.log(shift)
+  console.log(user)
+  return new Promise(function (resolve, reject) {
+    axios
+      .delete(baseUrl + `/shifts/${shift._id}`, {
+        headers: {
+          Authorization: token,
+        },
+      })
+      .then((response) => {
+        if (response.status >= 200 && response.status < 300) {
+          resolve(response)
+        } else {
+          reject({ error: 'Unable to delete the shift.' })
+        }
+      })
+      .catch((error) => {
+        reject({ error })
+      })
+  })
+}

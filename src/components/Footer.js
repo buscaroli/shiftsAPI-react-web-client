@@ -4,7 +4,7 @@ function Footer() {
   return (
     <div
       id="footer"
-      className="w-screen fixed inset-x-0 bottom-[-170px] hover:bottom-0 left-0 py-2 flex flex-col bg-amber-400 text-black text-center text-sm tracking-wide md:justify-center items-center content-center transition-all ease-in-out"
+      className="w-screen fixed inset-x-0 bottom-[-210px] sm:bottom-[-170px] hover:bottom-0 left-0 py-2 flex flex-col bg-amber-400 text-black text-center text-sm tracking-wide md:justify-center items-center content-center transition-all ease-in-out"
     >
       <div className="flex content-start md:w-[800px]">
         <div>

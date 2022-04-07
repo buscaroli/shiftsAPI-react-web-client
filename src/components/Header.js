@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { MenuIcon, XIcon } from '@heroicons/react/outline'
 import { useDispatch, useSelector } from 'react-redux'
 import { switchOn as loginSwitchOn } from '../features/loginModal/loginModalSlice'
@@ -23,6 +23,8 @@ const renderIcon = (showing) => {
 function Header({ title }) {
   const [showMenu, setShowMenu] = useState(true)
   const menuClick = () => setShowMenu(!showMenu)
+
+  let navigate = useNavigate()
 
   // true if user is logged in (either through the Login modal or the SignUp modal)
   const userLoggedIn = useSelector((state) => state.user.userData.name)
@@ -57,6 +59,7 @@ function Header({ title }) {
         <button
           onClick={(e) => {
             e.preventDefault()
+            navigate('/dataPage')
             dispatch(loginSwitchOn())
           }}
         >
@@ -73,6 +76,7 @@ function Header({ title }) {
         <button
           onClick={(e) => {
             e.preventDefault()
+            navigate('/dataPage')
             dispatch(signUpSwitchOn())
           }}
         >
@@ -89,6 +93,7 @@ function Header({ title }) {
         <button
           onClick={(e) => {
             e.preventDefault()
+            navigate('/')
             dispatch(logOff())
           }}
         >

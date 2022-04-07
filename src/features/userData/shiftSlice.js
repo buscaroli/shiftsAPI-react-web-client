@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-import { shiftsGetAll, addShift } from '../../utils/api'
+import { shiftsGetAll, addShift, deleteShift } from '../../utils/api'
 
 const initialState = {
   list: [],
@@ -37,6 +37,21 @@ export const add = createAsyncThunk(
   }
 )
 
+export const removeShift = createAsyncThunk(
+  'shifts/remove',
+  async (data, { rejectWithValue }) => {
+    try {
+      console.log('shiftSlice.js removeShift, data:\n')
+      console.log(data)
+
+      const deletedShift = await deleteShift(data)
+      return deletedShift
+    } catch (err) {
+      return rejectWithValue('Something went wrong deleting your shift.')
+    }
+  }
+)
+
 const { action, reducer } = createSlice({
   name: 'shifts',
   initialState,
@@ -70,6 +85,24 @@ const { action, reducer } = createSlice({
       state.loading = true
     },
     [add.rejected]: (state, { meta, payload, error }) => {
+      if (meta.requestId === state.currentRequestId.requestId) {
+        state.currentRequestId = meta
+        state.loading = false
+        state.error = error
+      }
+    },
+    [removeShift.fulfilled]: (state, { meta, payload, error }) => {
+      if (meta.requestId === state.currentRequestId.requestId) {
+        state.list = []
+        state.loading = false
+        state.error = null
+      }
+    },
+    [removeShift.pending]: (state, { meta }) => {
+      state.currentRequestId = meta
+      state.loading = true
+    },
+    [removeShift.rejected]: (state, { meta, payload, error }) => {
       if (meta.requestId === state.currentRequestId.requestId) {
         state.currentRequestId = meta
         state.loading = false
