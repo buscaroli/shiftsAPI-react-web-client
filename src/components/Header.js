@@ -33,7 +33,7 @@ function Header({ title }) {
 
   const logOff = async () => {
     console.log(`logging out: `, userData)
-    const res = dispatch(
+    dispatch(
       logout({
         name: userData.name,
         email: userData.email,

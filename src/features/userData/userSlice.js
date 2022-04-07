@@ -44,7 +44,7 @@ export const logout = createAsyncThunk(
   }
 )
 
-const { actions, reducer } = createSlice({
+const { reducer } = createSlice({
   name: 'users',
   initialState,
   reducers: {},

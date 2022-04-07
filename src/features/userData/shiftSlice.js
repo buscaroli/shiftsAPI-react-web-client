@@ -52,7 +52,7 @@ export const removeShift = createAsyncThunk(
   }
 )
 
-const { action, reducer } = createSlice({
+const { reducer } = createSlice({
   name: 'shifts',
   initialState,
   reducers: {},
