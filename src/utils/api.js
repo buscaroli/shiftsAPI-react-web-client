@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-let baseUrl = 'http://buscaroli-shifts-api.herokuapp.com'
+let baseUrl = 'https://buscaroli-shifts-api.herokuapp.com'
 
 export const serverSignUp = ({ name, email, password }) => {
   return new Promise(function (resolve, reject) {
