@@ -10,11 +10,11 @@ const paragraphs = [
     text: 'Your data is kept private and you can access your data from anywhere thanks to online storage.',
   },
   {
-    title: 'Charts',
+    title: 'Charts (TODO)',
     text: 'Get a better understanding of your finances by scanning your eyes on charts that show your weekly, monthly or even yearly performance.',
   },
   {
-    title: 'Easy Report',
+    title: 'Easy Report (TODO)',
     text: 'Received that email from your accountant? No more late nights looking for receipts and matching them to a clunky spreadsheet. Just export your yearly report and send it!',
   },
 ]
@@ -32,7 +32,7 @@ const renderCards = (articles) => {
 
 function WhatPage() {
   return (
-    <main id="whatPage" className="mt-32 mb-4 h-screen mx-auto md:w-[800px]">
+    <main id="whatPage" className="mt-32 mb-4 h-screen mx-auto md:w-[800px] ">
       <h1 className="text-4xl my-6 text-center text-slate-700">
         What can this App do?
       </h1>
