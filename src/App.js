@@ -12,18 +12,20 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 function App() {
   const login = useSelector((state) => state.login.value)
   const signup = useSelector((state) => state.signup.value)
-  const userLoggedIn = useSelector((state) => state.user.userData.name)
+
   return (
     <div className="grid grid-cols-1">
       <BrowserRouter>
-        <Header title="Shifts" />
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/whatPage" element={<WhatPage />} />
-          <Route path="/whyPage" element={<WhyPage />} />
-          <Route path="/dataPage" element={<DataPage />} />
-        </Routes>
-        <Footer />
+        <div className="flex flex-col justify-between">
+          <Header title="Shifts" />
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/whatPage" element={<WhatPage />} />
+            <Route path="/whyPage" element={<WhyPage />} />
+            <Route path="/dataPage" element={<DataPage />} />
+          </Routes>
+          <Footer />
+        </div>
       </BrowserRouter>
       {login && <LoginModal />}
       {signup && <SignUpModal />}

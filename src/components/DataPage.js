@@ -135,7 +135,7 @@ function DataPage() {
   }
 
   return (
-    <main className=" h-screen mt-40 sm:mt-28 pl-4 mb-4 mx-auto">
+    <main className=" flex-grow h-screen mt-40 sm:mt-28 pl-4 mb-4 mx-auto">
       <section>
         <div className="grid grid-cols-1 sm:grid-cols-2 p-4 gap-4">
           <UserCard userData={user} />
